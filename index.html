@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>To Do</title>
+    <link rel="stylesheet" href="style.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+    />
+  </head>
+  <body>
+    <div id="wrapper">
+      <div id="toDoInputWrapper">
+        <div id="toDoInputHeading">
+          <h1>TodoInput</h1>
+        </div>
+        <form id="toDoInput">
+          <div id="iconAndInput">
+            <i class="fa-solid fa-book"></i>
+            <input type="text" placeholder="New Todo" />
+          </div>
+          <button id="addNewTaskBtn">Add new task</button>
+        </form>
+      </div>
+      <div id="toDoListWrapper">
+        <div id="toDoListHeading">
+          <h1>TodoList</h1>
+        </div>
+        <div id="filterWrapper">
+          <button class="filterBtn">All</button>
+          <button class="filterBtn">Done</button>
+          <button class="filterBtn">Todo</button>
+        </div>
+        <div id="tasksWrapper">
+          <ul id="tasksList">
+            <li class="task">
+              <input type="checkbox" id="task-1" />
+              <label class="taskText" for="task-1">Task 1</label>
+              <label class="custom-checkbox" for="task-1">
+                <i class="fa-solid fa-check"></i>
+              </label>
+              <div class="taskIcons">
+                <i class="fa-solid fa-pen"></i>
+                <i class="fa-solid fa-trash"></i>
+              </div>
+            </li>
+            <li class="task">
+              <input type="checkbox" id="task-2" />
+              <label class="taskText" for="task-2">Task 2</label>
+              <label class="custom-checkbox" for="task-2">
+                <i class="fa-solid fa-check"></i>
+              </label>
+              <div class="taskIcons">
+                <i class="fa-solid fa-pen"></i>
+                <i class="fa-solid fa-trash"></i>
+              </div>
+            </li>
+          </ul>
+        </div>
+        <div id="deleteBtnsWrapper">
+          <button class="deleteBtns" id="deleteDoneBtn">
+            Delete done tasks
+          </button>
+          <button class="deleteBtns" id="deleteAllBtn">Delete all tasks</button>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
