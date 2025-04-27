@@ -57,7 +57,7 @@ body {
   max-width: 60%;
 }
 
-#toDoInput {
+#toDoInputForm {
   padding: 1rem;
   border: solid 0.17rem var(--border-color);
   border-radius: 0.4rem;
