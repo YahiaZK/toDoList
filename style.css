@@ -82,6 +82,7 @@
     }
     #popupCancelBtn {
       width: 25%;
+      background-color: var(--delete-btn-color);
     }
   }
 }
