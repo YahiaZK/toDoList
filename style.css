@@ -86,6 +86,44 @@
   }
 }
 
+#popup{
+  display: none;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  right: 0;
+  top: 0;
+  width: 100%;
+  height: 100vh;
+  flex-direction: column;
+  gap: 2rem;
+  background-color: rgba(172, 176, 176, 0.1803921569);
+  -webkit-backdrop-filter: blur(0.2rem);
+   backdrop-filter: blur(0.2rem);
+
+   .popupContent{
+    background-color: white;
+    border-radius: 2rem;
+    width: 25%;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    align-items: center;
+    padding: 2rem;
+
+    #popupBtns{
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+      align-items: center;
+
+      button{
+        padding: 0.5rem;
+      }
+    }
+   }
+}
+
 body {
   label {
     font-size: 1.3rem;
@@ -300,13 +338,17 @@ body {
   display: flex;
   justify-content: space-evenly;
   width: 100%;
-}
-.deleteBtns {
-  background-color: var(--delete-btn-color);
-  width: 35%;
-  &:hover {
-    color: var(--text-color);
-    background-color: var(--btn-text-color);
-    border: solid 0.17rem var(--delete-btn-color);
+  .deleteBtns {
+    background-color: var(--delete-btn-color);
+    width: 35%;
+    &:hover {
+      color: var(--text-color);
+      background-color: var(--btn-text-color);
+      border: solid 0.17rem var(--delete-btn-color);
+    }
+  }
+  button:disabled{
+    background-color: #dd6d6fd5;
+    cursor: none;
   }
 }

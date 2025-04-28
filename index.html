@@ -31,6 +31,18 @@
       </div>
     </div>
 
+
+    <div id="popup" class="popup">
+      <div class="popupContent">
+        <h2 id="popupTitle"></h2>
+        <p id="popupText"></p>
+        <div id="popupBtns">
+          <button id="popupConfirmBtn">Confirm</button>
+          <button id="popupCancelBtn">Cancel</button>
+        </div>
+      </div>
+    </div>
+
     <div id="wrapper">
       <div id="toDoInputWrapper">
         <div id="toDoInputHeading">
@@ -65,6 +77,7 @@
         </div>
         <div id="tasksWrapper">
           <ul id="tasksList">
+            <!-- yahya Version -->
             <!-- <li class="task">
               <input type="checkbox" id="task-1" />
               <label class="taskText" for="task-1">Task 1</label>
@@ -73,18 +86,41 @@
               </label>
               <div class="taskIcons">
                 <i class="fa-solid fa-pen"></i>
-                <i class="fa-solid fa-trash"></i>
+                <i id="deleteBtn-1" class="fa-solid fa-trash"></i>
               </div>
             </li>
-            <li class="task">
-              <input type="checkbox" id="task-2" />
-              <label class="taskText" for="task-2">Task 2</label>
-              <label class="custom-checkbox" for="task-2">
+            <li id="task-2" class="task">
+              <input type="checkbox" id="taskCheckbox-2" />
+              <label class="taskText" for="taskCheckbox-2">Task 2</label>
+              <label class="custom-checkbox" for="taskCheckbox-2">
                 <i class="fa-solid fa-check"></i>
               </label>
               <div class="taskIcons">
                 <i class="fa-solid fa-pen"></i>
-                <i class="fa-solid fa-trash"></i>
+                <i id="deleteBtn-2" class="fa-solid fa-trash"></i>
+              </div>
+            </li> -->
+            <!-- maisam Version -->
+            <!--             <li id="task-1" class="task">
+              <input type="checkbox" id="taskCheckbox-1"/>
+              <label class="taskText" for="taskCheckbox-1">Task 1</label>
+              <label class="custom-checkbox" for="taskCheckbox-1">
+                <i class="fa-solid fa-check"></i>
+              </label>
+              <div class="taskIcons">
+                <i class="fa-solid fa-pen"></i>
+                <i id="deleteBtn-1" class="fa-solid fa-trash"></i>
+              </div>
+            </li>
+            <li id="task-2" class="task">
+              <input type="checkbox" id="taskCheckbox-2" />
+              <label class="taskText" for="taskCheckbox-2">Task 2</label>
+              <label class="custom-checkbox" for="taskCheckbox-2">
+                <i class="fa-solid fa-check"></i>
+              </label>
+              <div class="taskIcons">
+                <i class="fa-solid fa-pen"></i>
+                <i id="deleteBtn-2" class="fa-solid fa-trash"></i>
               </div>
             </li> -->
           </ul>
