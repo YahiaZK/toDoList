@@ -21,9 +21,46 @@ toDoForm.addEventListener("submit", (e) => {
   }
 });
 
+const filterBtnAll = document.getElementById("filterBtnAll");
+const filterBtnDone = document.getElementById("filterBtnDone");
+const filterBtnTodo = document.getElementById("filterBtnTodo");
+let filterStatus = "all";
+
+filterBtnAll.addEventListener("click", (e) => {
+  e.preventDefault();
+  filterStatus = "all";
+  createTasksList();
+});
+
+filterBtnDone.addEventListener("click", (e) => {
+  e.preventDefault();
+  filterStatus = "done";
+  createTasksList();
+});
+
+filterBtnTodo.addEventListener("click", (e) => {
+  e.preventDefault();
+  filterStatus = "todo";
+  createTasksList();
+});
+
 const createTasksList = () => {
   tasksList.innerHTML = "";
-  allTasksArray.forEach((taskObject, taskIndex) => {
+  let tasksArrayToShow = [];
+
+  if (filterStatus == "all") {
+    tasksArrayToShow = allTasksArray;
+  } else if (filterStatus == "done") {
+    tasksArrayToShow = allTasksArray.filter(
+      (tasksObject) => tasksObject.completed
+    );
+  } else if (filterStatus == "todo") {
+    tasksArrayToShow = allTasksArray.filter(
+      (tasksObject) => !tasksObject.completed
+    );
+  }
+
+  tasksArrayToShow.forEach((taskObject, taskIndex) => {
     taskElement = createOneTask(taskObject, taskIndex);
     tasksList.append(taskElement);
   });
@@ -75,11 +112,11 @@ const createOneTask = (taskObject, taskIndex) => {
       e.preventDefault();
       hidePopupEdit();
     });
-
   });
 
   return taskElement;
 };
+
 
 const showPopupEdit = () => {
   const popupEdit = document.getElementById("popupEdit");
