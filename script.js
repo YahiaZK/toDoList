@@ -5,12 +5,17 @@ let todoTasksArray = [];
 const toDoForm = document.getElementById("toDoInputForm");
 const toDoInput = document.getElementById("toDoInput");
 const tasksList = document.getElementById("tasksList");
+const filterBtnAll = document.getElementById("filterBtnAll");
+const filterBtnDone = document.getElementById("filterBtnDone");
+const filterBtnTodo = document.getElementById("filterBtnTodo");
+let filterStatus = "all";
 
 toDoForm.addEventListener("submit", (e) => {
   e.preventDefault();
   const taskText = toDoInput.value.trim();
   if (taskText.length > 0) {
     const taskObject = {
+      id: Date.now(),
       text: taskText,
       completed: false,
     };
@@ -20,11 +25,6 @@ toDoForm.addEventListener("submit", (e) => {
     toDoInput.value = "";
   }
 });
-
-const filterBtnAll = document.getElementById("filterBtnAll");
-const filterBtnDone = document.getElementById("filterBtnDone");
-const filterBtnTodo = document.getElementById("filterBtnTodo");
-let filterStatus = "all";
 
 filterBtnAll.addEventListener("click", (e) => {
   e.preventDefault();
@@ -60,15 +60,17 @@ const createTasksList = () => {
     );
   }
 
-  tasksArrayToShow.forEach((taskObject, taskIndex) => {
-    taskElement = createOneTask(taskObject, taskIndex);
+  tasksArrayToShow.forEach((taskObject) => {
+    taskElement = createOneTask(taskObject);
     tasksList.append(taskElement);
   });
 };
 
-const createOneTask = (taskObject, taskIndex) => {
+let currentlyEditingTaskId = null;
+
+const createOneTask = (taskObject) => {
   const taskElement = document.createElement("li");
-  const taskId = "task-" + taskIndex;
+  const taskId = "task-" + taskObject.id;
   const taskText = taskObject.text;
   taskElement.className = "task";
   taskElement.innerHTML = `
@@ -85,8 +87,13 @@ const createOneTask = (taskObject, taskIndex) => {
 
   const taskCheckbox = taskElement.querySelector("input");
   taskCheckbox.addEventListener("change", () => {
-    allTasksArray[taskIndex].completed = taskCheckbox.checked;
-    saveTasks();
+    const taskIndex = allTasksArray.findIndex(
+      (task) => task.id === taskObject.id
+    );
+    if (taskIndex !== -1) {
+      allTasksArray[taskIndex].completed = taskCheckbox.checked;
+      saveTasks();
+    }
   });
   taskCheckbox.checked = taskObject.completed;
 
@@ -97,14 +104,24 @@ const createOneTask = (taskObject, taskIndex) => {
     showPopupEdit();
 
     const popupEditForm = document.getElementById("popupEditForm");
-    const popupEditInput = document.getElementById("popupEditInput");
     popupEditInput.value = taskObject.text;
+    currentlyEditingTaskId = taskObject.id;
+
     popupEditForm.addEventListener("submit", (e) => {
+      e.preventDefault();
+      const popupEditInput = document.getElementById("popupEditInput");
       const newText = popupEditInput.value.trim();
-      if (newText.length > 0) {
-        allTasksArray[taskIndex].text = newText;
-        createTasksList();
-        saveTasks();
+
+      if (newText.length > 0 && currentlyEditingTaskId !== null) {
+        const taskIndex = allTasksArray.findIndex(
+          (task) => task.id === currentlyEditingTaskId
+        );
+        if (taskIndex !== -1) {
+          allTasksArray[taskIndex].text = newText;
+          saveTasks();
+          createTasksList();
+          hidePopupEdit();
+        }
       }
     });
 
@@ -116,7 +133,6 @@ const createOneTask = (taskObject, taskIndex) => {
 
   return taskElement;
 };
-
 
 const showPopupEdit = () => {
   const popupEdit = document.getElementById("popupEdit");
