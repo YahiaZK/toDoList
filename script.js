@@ -1,6 +1,6 @@
 let allTasksArray = [];
-let doneTasksArray = [];
-let todoTasksArray = [];
+let filterStatus = "all";
+let currentlyEditingTaskId = null;
 
 const toDoForm = document.getElementById("toDoInputForm");
 const toDoInput = document.getElementById("toDoInput");
@@ -8,10 +8,14 @@ const tasksList = document.getElementById("tasksList");
 const filterBtnAll = document.getElementById("filterBtnAll");
 const filterBtnDone = document.getElementById("filterBtnDone");
 const filterBtnTodo = document.getElementById("filterBtnTodo");
-let filterStatus = "all";
+const popupCancelBtn = document.getElementById("popupCancelBtn");
 
 toDoForm.addEventListener("submit", (e) => {
   e.preventDefault();
+  createTask();
+});
+
+const createTask = () => {
   const taskText = toDoInput.value.trim();
   if (taskText.length > 0) {
     const taskObject = {
@@ -19,12 +23,16 @@ toDoForm.addEventListener("submit", (e) => {
       text: taskText,
       completed: false,
     };
-    allTasksArray.push(taskObject);
-    createTasksList();
-    saveTasks();
-    toDoInput.value = "";
+    saveInputAndReset(taskObject);
   }
-});
+};
+
+const saveInputAndReset = (taskObject) => {
+  allTasksArray.push(taskObject);
+  createTasksList();
+  saveTasks();
+  toDoInput.value = "";
+};
 
 filterBtnAll.addEventListener("click", (e) => {
   e.preventDefault();
@@ -46,19 +54,7 @@ filterBtnTodo.addEventListener("click", (e) => {
 
 const createTasksList = () => {
   tasksList.innerHTML = "";
-  let tasksArrayToShow = [];
-
-  if (filterStatus == "all") {
-    tasksArrayToShow = allTasksArray;
-  } else if (filterStatus == "done") {
-    tasksArrayToShow = allTasksArray.filter(
-      (tasksObject) => tasksObject.completed
-    );
-  } else if (filterStatus == "todo") {
-    tasksArrayToShow = allTasksArray.filter(
-      (tasksObject) => !tasksObject.completed
-    );
-  }
+  let tasksArrayToShow = changeFilterStatus();
 
   tasksArrayToShow.forEach((taskObject) => {
     taskElement = createOneTask(taskObject);
@@ -66,7 +62,15 @@ const createTasksList = () => {
   });
 };
 
-let currentlyEditingTaskId = null;
+const changeFilterStatus = () => {
+  if (filterStatus == "all") {
+    return allTasksArray;
+  } else if (filterStatus == "done") {
+    return allTasksArray.filter((taskObject) => taskObject.completed);
+  } else if (filterStatus == "todo") {
+    return allTasksArray.filter((taskObject) => !taskObject.completed);
+  }
+};
 
 const createOneTask = (taskObject) => {
   const taskElement = document.createElement("li");
@@ -85,6 +89,13 @@ const createOneTask = (taskObject) => {
               </div>
   `;
 
+  changeCheckbox(taskElement, taskObject);
+  renameTask(taskElement, taskObject);
+
+  return taskElement;
+};
+
+const changeCheckbox = (taskElement, taskObject) => {
   const taskCheckbox = taskElement.querySelector("input");
   taskCheckbox.addEventListener("change", () => {
     const taskIndex = allTasksArray.findIndex(
@@ -96,8 +107,9 @@ const createOneTask = (taskObject) => {
     }
   });
   taskCheckbox.checked = taskObject.completed;
+};
 
-  const popupCancelBtn = document.getElementById("popupCancelBtn");
+const renameTask = (taskElement, taskObject) => {
   const editBtn = taskElement.querySelector(".edit-btn");
   editBtn.addEventListener("click", (e) => {
     e.preventDefault();
@@ -124,14 +136,7 @@ const createOneTask = (taskObject) => {
         }
       }
     });
-
-    popupCancelBtn.addEventListener("click", (e) => {
-      e.preventDefault();
-      hidePopupEdit();
-    });
   });
-
-  return taskElement;
 };
 
 const showPopupEdit = () => {
@@ -143,6 +148,11 @@ const hidePopupEdit = () => {
   const popupEdit = document.getElementById("popupEdit");
   popupEdit.style.display = "none";
 };
+
+popupCancelBtn.addEventListener("click", (e) => {
+  e.preventDefault();
+  hidePopupEdit();
+});
 
 const saveTasks = () => {
   const tasksJson = JSON.stringify(allTasksArray);
