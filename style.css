@@ -6,6 +6,7 @@
   --trash-icon-color: #cc3d40;
   --pen-icon-color: #ffc20b;
   --border-color: #e4e4e4;
+  --webkit-scrollbar-color: #eaeaea;
 }
 
 * {
@@ -16,8 +17,9 @@
 
 #popupEdit {
   position: fixed;
-  height: 100vh;
+  height: 100%;
   width: 100%;
+  z-index: 999;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -28,7 +30,7 @@
   background-color: white;
   width: 100%;
   max-width: 20%;
-  height: 17vh;
+  height: 20vh;
   border-radius: 1rem;
   padding: 1rem;
   display: flex;
@@ -49,6 +51,25 @@
     width: 85%;
     height: 1.6rem;
   }
+
+  #popupInputValidation {
+    color: var(--trash-icon-color);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    width: 100%;
+    #popupBeEmpty {
+      display: none;
+    }
+    #popupStartWithNumber {
+      display: none;
+    }
+    #popupFiveCharLong {
+      display: none;
+    }
+  }
+
   #popupBtnsWrapper {
     display: flex;
     justify-content: center;
@@ -90,7 +111,7 @@ body {
 }
 
 #wrapper {
-  height: 100vh;
+  height: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -106,6 +127,7 @@ body {
   gap: 1.5rem;
   width: 100vw;
   max-width: 60%;
+  margin-top: 1.5rem;
 }
 
 #toDoInputForm {
@@ -116,7 +138,7 @@ body {
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  gap: 1rem;
+  gap: 0.5rem;
   width: 100%;
 
   #iconAndInput {
@@ -134,6 +156,23 @@ body {
       border-radius: 0.18rem;
       width: 100%;
       padding-left: 1rem;
+    }
+  }
+  #inputValidation {
+    color: var(--trash-icon-color);
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    flex-direction: column;
+    width: 100%;
+    #beEmpty {
+      display: none;
+    }
+    #startWithNumber {
+      display: none;
+    }
+    #fiveCharLong {
+      display: none;
     }
   }
   #addNewTaskBtn {
@@ -159,17 +198,41 @@ body {
 }
 .filterBtn {
   width: 30%;
+  &:focus {
+    background-color: var(--btn-text-color);
+    color: var(--text-color);
+    border: solid 0.17rem var(--primary-color);
+  }
+}
+
+::-webkit-scrollbar {
+  width: 0.2rem;
+  height: 0.5rem;
+  background-color: var(--webkit-scrollbar-color);
+}
+
+::-webkit-scrollbar-button {
+  display: none;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: var(--primary-color);
+  border-radius: 1rem;
 }
 
 #tasksWrapper {
   width: 100%;
 
   #tasksList {
+    overflow-y: auto;
+    height: 23rem;
     list-style-type: none;
     display: flex;
     flex-direction: column;
     gap: 1rem;
+    padding: 0.5rem;
   }
+
   .task {
     border: solid 0.17rem var(--border-color);
     border-radius: 0.18rem;

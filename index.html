@@ -16,6 +16,13 @@
         <h1>Rename Task</h1>
         <form id="popupEditForm">
           <input type="text" id="popupEditInput" autocomplete="off" />
+          <div id="popupInputValidation">
+            <p id="popupBeEmpty">Task cannot be empty</p>
+            <p id="popupStartWithNumber">Task cannot start with a number</p>
+            <p id="popupFiveCharLong">
+              Task must be at least 5 characters long
+            </p>
+          </div>
           <div id="popupBtnsWrapper">
             <button id="popupSubmitBtn" type="submit">Save</button>
             <button id="popupCancelBtn" class="deleteBtns">Cancel</button>
@@ -38,6 +45,11 @@
               id="toDoInput"
               autocomplete="off"
             />
+          </div>
+          <div id="inputValidation">
+            <p id="beEmpty">Task cannot be empty</p>
+            <p id="startWithNumber">Task cannot start with a number</p>
+            <p id="fiveCharLong">Task must be at least 5 characters long</p>
           </div>
           <button id="addNewTaskBtn">Add new task</button>
         </form>

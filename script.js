@@ -1,6 +1,7 @@
 let allTasksArray = [];
 let filterStatus = "all";
 let currentlyEditingTaskId = null;
+const regex = /^[0-9]/;
 
 const toDoForm = document.getElementById("toDoInputForm");
 const toDoInput = document.getElementById("toDoInput");
@@ -9,6 +10,12 @@ const filterBtnAll = document.getElementById("filterBtnAll");
 const filterBtnDone = document.getElementById("filterBtnDone");
 const filterBtnTodo = document.getElementById("filterBtnTodo");
 const popupCancelBtn = document.getElementById("popupCancelBtn");
+const beEmpty = document.getElementById("beEmpty");
+const startWithNumber = document.getElementById("startWithNumber");
+const fiveCharLong = document.getElementById("fiveCharLong");
+const popupBeEmpty = document.getElementById("popupBeEmpty");
+const popupStartWithNumber = document.getElementById("popupStartWithNumber");
+const popupFiveCharLong = document.getElementById("popupFiveCharLong");
 
 toDoForm.addEventListener("submit", (e) => {
   e.preventDefault();
@@ -17,7 +24,22 @@ toDoForm.addEventListener("submit", (e) => {
 
 const createTask = () => {
   const taskText = toDoInput.value.trim();
-  if (taskText.length > 0) {
+  if (taskText.length == 0) {
+    beEmpty.style.display = "flex";
+    fiveCharLong.style.display = "none";
+    startWithNumber.style.display = "none";
+  } else if (taskText.length < 5) {
+    beEmpty.style.display = "none";
+    fiveCharLong.style.display = "flex";
+    startWithNumber.style.display = "none";
+  } else if (regex.test(taskText)) {
+    beEmpty.style.display = "none";
+    fiveCharLong.style.display = "none";
+    startWithNumber.style.display = "flex";
+  } else {
+    beEmpty.style.display = "none";
+    fiveCharLong.style.display = "none";
+    startWithNumber.style.display = "nono";
     const taskObject = {
       id: Date.now(),
       text: taskText,
@@ -124,7 +146,23 @@ const renameTask = (taskElement, taskObject) => {
       const popupEditInput = document.getElementById("popupEditInput");
       const newText = popupEditInput.value.trim();
 
-      if (newText.length > 0 && currentlyEditingTaskId !== null) {
+      if (newText.length == 0) {
+        popupBeEmpty.style.display = "flex";
+        popupFiveCharLong.style.display = "none";
+        popupStartWithNumber.style.display = "none";
+      } else if (newText.length < 5) {
+        popupBeEmpty.style.display = "none";
+        popupFiveCharLong.style.display = "flex";
+        popupStartWithNumber.style.display = "none";
+      } else if (regex.test(newText)) {
+        popupBeEmpty.style.display = "none";
+        popupFiveCharLong.style.display = "none";
+        popupStartWithNumber.style.display = "flex";
+      } else if (currentlyEditingTaskId !== null) {
+        popupBeEmpty.style.display = "none";
+        popupFiveCharLong.style.display = "none";
+        popupStartWithNumber.style.display = "none";
+
         const taskIndex = allTasksArray.findIndex(
           (task) => task.id === currentlyEditingTaskId
         );
