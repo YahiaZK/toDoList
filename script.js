@@ -2,7 +2,7 @@ let allTasksArray = [];
 let doneTasksArray = [];
 let todoTasksArray = [];
 
-const toDoForm = document.querySelector("form");
+const toDoForm = document.getElementById("toDoInputForm");
 const toDoInput = document.getElementById("toDoInput");
 const tasksList = document.getElementById("tasksList");
 
@@ -41,7 +41,7 @@ const createOneTask = (taskObject, taskIndex) => {
                 <i class="fa-solid fa-check"></i>
               </label>
               <div class="taskIcons">
-                <i class="fa-solid fa-pen"></i>
+                <i class="fa-solid fa-pen edit-btn"></i>
                 <i class="fa-solid fa-trash"></i>
               </div>
   `;
@@ -52,7 +52,43 @@ const createOneTask = (taskObject, taskIndex) => {
     saveTasks();
   });
   taskCheckbox.checked = taskObject.completed;
+
+  const popupCancelBtn = document.getElementById("popupCancelBtn");
+  const editBtn = taskElement.querySelector(".edit-btn");
+  editBtn.addEventListener("click", (e) => {
+    e.preventDefault();
+    showPopupEdit();
+
+    const popupEditForm = document.getElementById("popupEditForm");
+    const popupEditInput = document.getElementById("popupEditInput");
+    popupEditInput.value = taskObject.text;
+    popupEditForm.addEventListener("submit", (e) => {
+      const newText = popupEditInput.value.trim();
+      if (newText.length > 0) {
+        allTasksArray[taskIndex].text = newText;
+        createTasksList();
+        saveTasks();
+      }
+    });
+
+    popupCancelBtn.addEventListener("click", (e) => {
+      e.preventDefault();
+      hidePopupEdit();
+    });
+
+  });
+
   return taskElement;
+};
+
+const showPopupEdit = () => {
+  const popupEdit = document.getElementById("popupEdit");
+  popupEdit.style.display = "flex";
+};
+
+const hidePopupEdit = () => {
+  const popupEdit = document.getElementById("popupEdit");
+  popupEdit.style.display = "none";
 };
 
 const saveTasks = () => {
