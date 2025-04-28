@@ -86,7 +86,7 @@
   }
 }
 
-#popup{
+.popupDelete {
   display: none;
   justify-content: center;
   align-items: center;
@@ -97,11 +97,9 @@
   height: 100vh;
   flex-direction: column;
   gap: 2rem;
-  background-color: rgba(172, 176, 176, 0.1803921569);
-  -webkit-backdrop-filter: blur(0.2rem);
-   backdrop-filter: blur(0.2rem);
+  background-color: rgba(0, 0, 0, 0.239);
 
-   .popupContent{
+  .popupContent {
     background-color: white;
     border-radius: 2rem;
     width: 25%;
@@ -111,17 +109,23 @@
     align-items: center;
     padding: 2rem;
 
-    #popupBtns{
+    .popupBtns {
       display: flex;
       gap: 1rem;
       justify-content: center;
       align-items: center;
 
-      button{
+      button {
         padding: 0.5rem;
       }
+      #popupDeleteAllCancelBtn {
+        background-color: var(--delete-btn-color);
+      }
+      #popupDeleteDoneCancelBtn {
+        background-color: var(--delete-btn-color);
+      }
     }
-   }
+  }
 }
 
 body {
@@ -347,7 +351,7 @@ body {
       border: solid 0.17rem var(--delete-btn-color);
     }
   }
-  button:disabled{
+  button:disabled {
     background-color: #dd6d6fd5;
     cursor: none;
   }
