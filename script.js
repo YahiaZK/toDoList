@@ -41,7 +41,7 @@ const createTask = () => {
   } else {
     beEmpty.style.display = "none";
     fiveCharLong.style.display = "none";
-    startWithNumber.style.display = "nono";
+    startWithNumber.style.display = "none";
     const taskObject = {
       id: Date.now(),
       text: taskText,
