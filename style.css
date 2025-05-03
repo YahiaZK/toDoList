@@ -32,7 +32,7 @@
   max-width: 20%;
   height: 20vh;
   border-radius: 1rem;
-  padding: 1rem;
+  padding: 1.3rem;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -50,6 +50,9 @@
   #popupEditInput {
     width: 85%;
     height: 1.6rem;
+    padding: 0.4rem;
+    padding-left: 0.7rem;
+    border-radius: 0.6rem;
   }
 
   #popupInputValidation {
@@ -125,11 +128,16 @@
       #popupDeleteDoneCancelBtn {
         background-color: var(--delete-btn-color);
       }
+      #popupDeleteOneCancelBtn {
+        background-color: var(--delete-btn-color);
+      }
     }
   }
 }
 
 body {
+  height: 100vh;
+
   label {
     font-size: 1.3rem;
   }
@@ -268,7 +276,7 @@ body {
 
   #tasksList {
     overflow-y: auto;
-    height: 23rem;
+    max-height: 23rem;
     list-style-type: none;
     display: flex;
     flex-direction: column;
@@ -339,6 +347,11 @@ body {
   }
 }
 
+#noTasksText {
+  font-size: 1.6rem;
+}
+
+
 #deleteBtnsWrapper {
   display: flex;
   justify-content: space-evenly;
@@ -354,6 +367,6 @@ body {
   }
   button:disabled {
     background-color: #dd6d6fd5;
-    cursor: none;
+    pointer-events: none;
   }
 }

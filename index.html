@@ -53,6 +53,17 @@
       </div>
     </div>
 
+    <div id="popupDeleteOne" class="popupDelete">
+      <div class="popupContent">
+        <h2>Delete Task</h2>
+        <p>Are you sure you want to delete this task?</p>
+        <div class="popupBtns">
+          <button id="popupDeleteOneConfirmBtn">Confirm</button>
+          <button id="popupDeleteOneCancelBtn">Cancel</button>
+        </div>
+      </div>
+    </div>
+
     <div id="wrapper">
       <div id="toDoInputWrapper">
         <div id="toDoInputHeading">
@@ -86,33 +97,9 @@
           <button id="filterBtnTodo" class="filterBtn">Todo</button>
         </div>
         <div id="tasksWrapper">
-          <ul id="tasksList">
-            <!-- yahya Version -->
-            <!-- <li class="task">
-              <input type="checkbox" id="task-1" />
-              <label class="taskText" for="task-1">Task 1</label>
-              <label class="custom-checkbox" for="task-1">
-                <i class="fa-solid fa-check"></i>
-              </label>
-              <div class="taskIcons">
-                <i class="fa-solid fa-pen"></i>
-                <i id="deleteBtn-1" class="fa-solid fa-trash"></i>
-              </div>
-            </li> -->
-            <!-- maisam Version -->
-            <!-- <li id="task-1" class="task">
-              <input type="checkbox" id="taskCheckbox-1"/>
-              <label class="taskText" for="taskCheckbox-1">Task 1</label>
-              <label class="custom-checkbox" for="taskCheckbox-1">
-                <i class="fa-solid fa-check"></i>
-              </label>
-              <div class="taskIcons">
-                <i class="fa-solid fa-pen"></i>
-                <i id="deleteBtn-1" class="fa-solid fa-trash"></i>
-              </div>
-            </li> -->
-          </ul>
+          <ul id="tasksList"></ul>
         </div>
+        <p id="noTasksText">No tasks.</p>
         <div id="deleteBtnsWrapper">
           <button class="deleteBtns" id="deleteDoneBtn">
             Delete done tasks
